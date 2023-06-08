@@ -12,7 +12,7 @@ namespace Persistence.Repositories
         private readonly ApplicationDbContext _db;
         private readonly IMapper _mapper;
 
-        public SponsorRepository(ApplicationDbContext db, IMapper mapper) : base(db)
+        public SponsorRepository(ApplicationDbContext db, IMapper mapper) : base(db, mapper)
         {
             _db = db;
             _mapper = mapper;

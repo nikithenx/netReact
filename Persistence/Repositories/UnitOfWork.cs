@@ -23,7 +23,7 @@ namespace Persistence.Repositories
             _appUserRepository ??= new AppUserRepository(_dbContext, _mapper);
 
         public IAppUserProjectRepository AppUserProjectRepository =>
-            _appUserProjectRepository ??= new AppUserProjectRepository(_dbContext);
+            _appUserProjectRepository ??= new AppUserProjectRepository(_dbContext, _mapper);
 
         public IProjectRepository ProjectRepository => 
             _projectRepository ??= new ProjectRepository(_dbContext, _mapper);

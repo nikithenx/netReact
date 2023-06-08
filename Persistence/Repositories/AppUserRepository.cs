@@ -12,9 +12,9 @@ namespace Persistence.Repositories
         private readonly ApplicationDbContext _db;
         private readonly IMapper _mapper;
 
-        public AppUserRepository(ApplicationDbContext db, IMapper mapper) : base(db)
+        public AppUserRepository(ApplicationDbContext db, IMapper mapper) : base(db, mapper)
         {
-            _db = db;
+            _db = db;   
             _mapper = mapper;
         }
 

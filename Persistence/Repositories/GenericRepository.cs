@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Application.Contracts;
 using System.Linq.Expressions;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace Persistence.Repositories
 {
@@ -8,11 +10,13 @@ namespace Persistence.Repositories
     {
         private readonly ApplicationDbContext _db;
         private readonly DbSet<TEntity> _dbSet;
+        private readonly IMapper _mapper;
 
-        public GenericRepository(ApplicationDbContext db) 
+        public GenericRepository(ApplicationDbContext db, IMapper mapper) 
         { 
             _db = db;
             _dbSet = _db.Set<TEntity>();
+            _mapper = mapper;
         }
 
         public async Task<TEntity> AddAsync(TEntity item)
@@ -57,6 +61,32 @@ namespace Persistence.Repositories
             }
         }
 
+        public async Task<IEnumerable<TResult>> GetAllAsync<TResult>(
+            Expression<Func<TEntity, bool>> filter = null, 
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null) 
+            where TResult : class
+        {
+            IQueryable<TEntity> query = _dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            if (orderBy != null)
+            {
+                return await orderBy(query)
+                    .ProjectTo<TResult>(_mapper.ConfigurationProvider)
+                    .ToListAsync();
+            }
+            else
+            {
+                return await query
+                    .ProjectTo<TResult>(_mapper.ConfigurationProvider)
+                    .ToListAsync();
+            }
+        }
+
         public async Task<TEntity> GetAsync(
             Expression<Func<TEntity, bool>> filter, 
             string includeProperties = "")
@@ -75,6 +105,13 @@ namespace Persistence.Repositories
             }
 
             return await query.FirstOrDefaultAsync();
+        }
+
+        public async Task<TResult> GetAsync<TResult>(
+            Expression<Func<TEntity, bool>> filter) where TResult : class
+        {
+            IQueryable<TEntity> query = _dbSet.Where(filter);
+            return await query.ProjectTo<TResult>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
         }
 
         public async Task<bool> SaveAsync() 

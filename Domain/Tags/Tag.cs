@@ -1,14 +1,13 @@
-﻿using Domain.Projects;
+﻿using Domain.Common;
+using Domain.Projects;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Tags
 {
     [Table("Tags")]
-    public class Tag
+    public class Tag : BaseDomainEntity
     {
-        public int Id { get; set; } 
-        public string Name { get; set; }
-
+        public required string Name { get; set; }
         public virtual ICollection<ProjectTag> Projects { get; set; }
     }
 }
