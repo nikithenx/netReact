@@ -1,4 +1,5 @@
 ﻿using Domain.Common;
+using Domain.Projects;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.AppUsers
@@ -14,6 +15,6 @@ namespace Domain.AppUsers
         public string PhoneNumber { get; set; }
         public string Picture { get; set; }
 
-        public virtual ICollection<AppUserProject> Projects { get; set; }
+        public virtual ICollection<ProjectAppUser> Projects { get; set; }
     }
 }

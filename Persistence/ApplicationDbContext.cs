@@ -13,9 +13,9 @@ namespace Persistence
         }
 
         public DbSet<AppUser> AppUsers { get; set; }
-        public DbSet<AppUserProject> AppUserProjects { get; set; }
         public DbSet<Project> Projects { get; set; }
-        public DbSet<ProjectTag> ProjectTags { get; set; }
+         public DbSet<ProjectAppUser> ProjectsAppUsers { get; set; }
+        public DbSet<ProjectTag> ProjectsTags { get; set; }
         public DbSet<Sponsor> Sponsors { get; set; }
         public DbSet<Tag> Tags { get; set; }
     }

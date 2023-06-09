@@ -15,7 +15,7 @@ namespace Application.Maps
         public MappingProfile() 
         {
             CreateMap<AppUser, AppUserForSearchDto>().MaxDepth(1);
-            CreateMap<AppUserForProjectCreationDto, AppUserProject>().MaxDepth(1);
+            CreateMap<AppUserForProjectCreationDto, ProjectAppUser>().MaxDepth(1);
 
             CreateMap<Project, ProjectCreateDto>().MaxDepth(1).ReverseMap();
             CreateMap<Project, ProjectUpdateDto>().MaxDepth(1).ReverseMap();

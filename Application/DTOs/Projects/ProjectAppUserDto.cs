@@ -1,8 +1,6 @@
-﻿using Application.DTOs.Projects;
-
-namespace Application.DTOs.AppUsers
+﻿namespace Application.DTOs.Projects
 {
-    public class AppUserProjectDto
+    public class ProjectAppUserDto
     {
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

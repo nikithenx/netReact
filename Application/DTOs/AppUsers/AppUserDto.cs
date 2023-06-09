@@ -1,4 +1,6 @@
-﻿namespace Application.DTOs.AppUsers
+﻿using Application.DTOs.Projects;
+
+namespace Application.DTOs.AppUsers
 {
     public class AppUserDto
     {
@@ -10,6 +12,6 @@
         public string PhoneNumber { get; set; }
         public string Picture { get; set; }
 
-        public virtual ICollection<AppUserProjectDto> Projects { get; set; }
+        public virtual ICollection<ProjectAppUserDto> Projects { get; set; }
     }
 }

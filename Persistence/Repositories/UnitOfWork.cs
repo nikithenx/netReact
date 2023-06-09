@@ -8,8 +8,9 @@ namespace Persistence.Repositories
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
         private IAppUserRepository _appUserRepository;
-        private IAppUserProjectRepository _appUserProjectRepository;
         private IProjectRepository _projectRepository;
+        private IProjectAppUserRepository _projectAppUserRepository;
+        private IProjectTagRepository _projectTagRepository;
         private ISponsorRepository _sponsorRepository;
         private ITagRepository _tagRepository;
 
@@ -22,11 +23,14 @@ namespace Persistence.Repositories
         public IAppUserRepository AppUserRepository =>
             _appUserRepository ??= new AppUserRepository(_dbContext, _mapper);
 
-        public IAppUserProjectRepository AppUserProjectRepository =>
-            _appUserProjectRepository ??= new AppUserProjectRepository(_dbContext, _mapper);
-
         public IProjectRepository ProjectRepository => 
             _projectRepository ??= new ProjectRepository(_dbContext, _mapper);
+
+        public IProjectAppUserRepository ProjectAppUserRepository =>
+            _projectAppUserRepository ??= new ProjectAppUserRepository(_dbContext, _mapper);
+
+        public IProjectTagRepository ProjectTagRepository =>
+            _projectTagRepository ??= new ProjectTagRepository(_dbContext, _mapper);
 
         public ISponsorRepository SponsorRepository =>
             _sponsorRepository ??= new SponsorRepository(_dbContext, _mapper);  

@@ -1,17 +1,16 @@
-﻿using Domain.Common;
-using Domain.Projects;
+﻿using Domain.AppUsers;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
-namespace Domain.AppUsers
+namespace Domain.Projects
 {
-    [Table("AppUsersProjects")]
-    public class AppUserProject : BaseDomainEntity
+    [Table("ProjectsAppUsers")]
+    public class ProjectAppUser
     {
-        [ForeignKey("AppUser")]
-        public int AppUserId { get; set; }
+        public int Id { get; init; }
         [ForeignKey("Project")]
         public int ProjectId { get; set; }
+        [ForeignKey("AppUser")]
+        public int AppUserId { get; set; }
         public DateTime StartDate { get; set; } 
         public DateTime EndDate { get; set; }   
 
