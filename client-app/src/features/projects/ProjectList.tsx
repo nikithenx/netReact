@@ -130,9 +130,6 @@ const ProjectList = () => {
                     }
                 }}
             />
-            <Typography variant="h5" gutterBottom sx={ { mb: 2} }>
-                List of Projects
-            </Typography>
             <Box sx={{ height: '80vh', width: '100%' }}>
                 <DataGrid
                     loading={loading}

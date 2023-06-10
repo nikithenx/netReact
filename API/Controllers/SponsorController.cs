@@ -28,9 +28,9 @@ namespace API.Controllers
         {
             try
             {
-                var sponsors = await _unitOfWork.SponsorRepository.GetAllAsync();
-                var response = _mapper.Map<IEnumerable<SponsorDto>>(sponsors);
-                return Ok(response);
+                var sponsors = await _unitOfWork.SponsorRepository.GetAllAsync<SponsorDto>(
+                    orderBy: q => q.OrderByDescending(x => x.Surname));
+                return Ok(sponsors);
             }
             catch (Exception ex)
             {

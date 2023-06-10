@@ -19,7 +19,9 @@ namespace Application.Maps
 
             CreateMap<Project, ProjectCreateDto>().MaxDepth(1).ReverseMap();
             CreateMap<Project, ProjectUpdateDto>().MaxDepth(1).ReverseMap();
-            CreateMap<Project, ProjectDto>().MaxDepth(2).ReverseMap();
+            CreateMap<Project, ProjectDto>()
+                .ForMember(q => q.SponsorName, opt => opt.MapFrom(q => q.Sponsor.Forename + " " + q.Sponsor.Surname))
+                .MaxDepth(1).ReverseMap();
 
             CreateMap<Sponsor, SponsorDto>().MaxDepth(1).ReverseMap(); 
             CreateMap<Sponsor, SponsorCreateDto>().MaxDepth(1).ReverseMap();
