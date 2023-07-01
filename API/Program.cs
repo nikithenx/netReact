@@ -57,15 +57,16 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-try
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+
+try 
 {
-    using var scope = app.Services.CreateScope();
-    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    await Seed.SeedData(dbContext);
+    await Seed.SeedData(services);
 }
 catch (Exception ex)
 {
-    var logger = app.Services.GetRequiredService<ILogger<Program>>();
+    var logger = services.GetRequiredService<ILogger<Program>>();
     logger.LogError(ex, "An error occured during seeding");
 }
 

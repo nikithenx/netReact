@@ -1,4 +1,6 @@
+using Identity.Configurations;
 using Identity.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +15,9 @@ namespace Identity
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.ApplyConfigurationsFromAssembly(typeof(ApplicationIdentityDbContext).Assembly);
+            new RoleConfiguration().Configure(builder.Entity<IdentityRole>());
+            new UserConfiguration().Configure(builder.Entity<ApiUser>());
+            new UserRoleConfiguration().Configure(builder.Entity<IdentityUserRole<string>>());
         }
     }
 }
