@@ -1,23 +1,22 @@
 import { createTheme } from "@mui/material";
-import { grey, purple } from "@mui/material/colors";
+import { blue, grey } from "@mui/material/colors";
 
 
 const Theme = createTheme({
     palette: {
         mode: 'dark',
-        primary: purple,
-        divider: grey[500],
+        primary: blue,
+        divider: grey[300],
         background: {
-            default: grey[900],
-            paper: grey[900],
+            default: '#2D3033'
         },
         text: {
-            primary: '#fff',
-            secondary: grey[500],
+            primary: grey[300],
+            secondary: '#FFFFFF',
         },
     },
     typography: {
-        fontSize: 12,
+        fontSize: 11,
     },
 });
 

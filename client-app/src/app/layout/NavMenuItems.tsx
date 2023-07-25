@@ -36,13 +36,13 @@ export default function NavMenuItems() {
         <React.Fragment>
             <ListItemButton onClick={() => onNavigateTo('/')}>
                 <ListItemIcon>
-                    <Home />
+                    <Home color="primary"/>
                 </ListItemIcon>
                 <ListItemText primary="Home" />
             </ListItemButton>
             <ListItemButton onClick={handleProjectClick}>
                 <ListItemIcon>
-                    <Assignment />
+                    <Assignment color="primary" />
                 </ListItemIcon>
                 <ListItemText primary="Projects" />
                 {openSublistProject ? <ExpandLess /> : <ExpandMore />}
@@ -58,7 +58,7 @@ export default function NavMenuItems() {
                 ))}           
             <ListItemButton onClick={() => onNavigateTo(NavigationPoints.SponsorList)}>
                 <ListItemIcon>
-                    <ShoppingCart />
+                    <ShoppingCart color="primary"/>
                 </ListItemIcon>
                 <ListItemText primary="Clients" />
             </ListItemButton>

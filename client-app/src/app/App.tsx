@@ -16,8 +16,10 @@ import { Constants } from '../constants/Constants';
 import Routes from '../constants/Routes';
 import Theme from './theme/Theme';
 import NavMenuItems from './layout/NavMenuItems';
-import { Typography } from '@mui/material';
-import { AcUnit } from '@mui/icons-material';
+import { Autocomplete, Avatar, InputAdornment, TextField, Typography } from '@mui/material';
+import { Person2, Search } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
+import { NavigationPoints } from '../constants/NavigationPoints';
 
 
 interface AppBarProps extends MuiAppBarProps {
@@ -76,6 +78,9 @@ function App() {
         setOpen(!open);
     };
 
+    const navigate = useNavigate();
+    const onNavigateTo = (link: string) => navigate(link);
+
     return (
         <ThemeProvider theme={Theme}>
             <CssBaseline />
@@ -96,19 +101,32 @@ function App() {
                             }}>
                             <MenuIcon />
                         </IconButton>
-                        <AcUnit
-                            color="primary"
-                            fontSize="large"
-                            sx={{ mr: 2 }}
-                        />
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component="div"
-                            sx={{ display: { xs: 'none', sm: 'block' } }}
-                        >
-                            netReact
-                        </Typography>
+                        <Box sx={{ display: 'flex', alignItems: 'flex-end', width: '50%' }}>
+                            <Search sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+                            <Autocomplete
+                                id="search"
+                                sx={{ width: '80%' }}
+                                onChange={(e, newValue) => {
+                                    if (newValue !== undefined && newValue !== null) {
+                                        onNavigateTo(newValue.link)
+                                    }
+                                }}
+                                isOptionEqualToValue={(option, value) => option.displayName === value.displayName}
+                                getOptionLabel={(option) => option.displayName}
+                                options={NavigationPoints.DictNavPoints}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        placeholder='Search...'
+                                        variant='standard'
+                                    />
+                                )}
+                            />
+                        </Box>                   
+                        <Box sx={{ flexGrow: 1 }} />
+                        <Avatar>
+                            <Person2 fontSize='large' />
+                        </Avatar>
                     </Toolbar>
                 </AppBar>
                 <Drawer variant="permanent" open={open}>
@@ -119,6 +137,17 @@ function App() {
                             justifyContent: 'flex-end',
                             px: [1],
                         }}>
+                        {open ? 
+                            <Typography
+                                variant="h6"
+                                noWrap
+                                component="div"
+                                sx={{ display: { xs: 'none', sm: 'block' } }}
+                            >
+                                My App
+                            </Typography> : ""
+                        }
+                        <Box sx={{ flexGrow: 1 }} />
                         <IconButton onClick={toggleDrawer}>
                             <ChevronLeftIcon />
                         </IconButton>
