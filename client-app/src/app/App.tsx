@@ -16,8 +16,8 @@ import { Constants } from '../constants/Constants';
 import Routes from '../constants/Routes';
 import Theme from './theme/Theme';
 import NavMenuItems from './layout/NavMenuItems';
-import { Autocomplete, Avatar, InputAdornment, TextField, Typography } from '@mui/material';
-import { Person2, Search } from '@mui/icons-material';
+import { Autocomplete, Avatar, TextField, Typography } from '@mui/material';
+import { Person } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { NavigationPoints } from '../constants/NavigationPoints';
 
@@ -101,10 +101,9 @@ function App() {
                             }}>
                             <MenuIcon />
                         </IconButton>
-                        <Box sx={{ display: 'flex', alignItems: 'flex-end', width: '50%' }}>
-                            <Search sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+                        <Box sx={{ display: 'flex', alignItems: 'flex-end', width: '40%', marginLeft: '20px' }}>
                             <Autocomplete
-                                id="search"
+                                id="search"                            
                                 sx={{ width: '80%' }}
                                 onChange={(e, newValue) => {
                                     if (newValue !== undefined && newValue !== null) {
@@ -117,15 +116,16 @@ function App() {
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}
-                                        placeholder='Search...'
-                                        variant='standard'
+                                        placeholder='Navigation...'
+                                        variant='outlined'
+                                        size='small'
                                     />
                                 )}
                             />
                         </Box>                   
                         <Box sx={{ flexGrow: 1 }} />
                         <Avatar>
-                            <Person2 fontSize='large' />
+                            <Person fontSize='large' />
                         </Avatar>
                     </Toolbar>
                 </AppBar>

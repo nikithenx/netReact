@@ -9,8 +9,8 @@ import {
     ExpandMore,
     Home,
     PlaylistAdd,
+    Segment,
     ShoppingCart,
-    ViewList
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { NavigationPoints } from '../../constants/NavigationPoints';
@@ -25,7 +25,7 @@ export default function NavMenuItems() {
     };
 
     const sublistProjects = [
-        { icon: <ViewList />, label: 'Complete List', href: NavigationPoints.ProjectList },
+        { icon: <Segment />, label: 'Complete List', href: NavigationPoints.ProjectList },
         { icon: <PlaylistAdd />, label: 'Create', href: NavigationPoints.ProjectCreation },
     ];
 
