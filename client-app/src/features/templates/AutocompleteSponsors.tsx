@@ -66,8 +66,8 @@ const AutocompleteSponsors: React.FC<PropsInterface> = (props: PropsInterface) =
             onClose={() => {
                 setOpen(false);
             }}
-            isOptionEqualToValue={(option, value) => option.name === value.name}
-            getOptionLabel={(option) => option.name}
+            isOptionEqualToValue={(option, value) => option.forename === value.forename || option.surname === value.surname}
+            getOptionLabel={(option) => option.forename + ' ' + option.surname}
             options={options}
             loading={loading}
             renderInput={(params) => (

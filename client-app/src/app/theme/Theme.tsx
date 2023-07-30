@@ -1,11 +1,13 @@
 import { createTheme } from "@mui/material";
-import { blue, grey } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 
 
 const Theme = createTheme({
     palette: {
         mode: 'dark',
-        primary: blue,
+        primary: {
+            main: 'rgb(33,113,255)'
+        },
         divider: grey[300],
         background: {
             default: '#2D3033'

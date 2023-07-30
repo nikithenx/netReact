@@ -16,7 +16,11 @@ const InfoCard: React.FC<PropsInterface> = (props: PropsInterface) => {
                     alt=""
                 />
                 <CardContent>
-                    <Typography color="primary" gutterBottom variant="h4" component="div">
+                    <Typography
+                        sx={
+                            { backgroundImage: 'linear-gradient(136deg, rgb(33,113,255) 0%,rgb(87,64,233) 50%,rgb(35,35,135) 100%)'}
+                        }
+                        gutterBottom variant="h4" component="div">
                         {props.card.header}
                     </Typography>
                     <Typography variant="body1" color="text.secondary">

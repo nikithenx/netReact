@@ -1,7 +1,8 @@
 
 export interface Sponsor {
     id: number;
-    name: string;
+    forename: string;
+    surname: string;
     email: string;
     region: string;
 }

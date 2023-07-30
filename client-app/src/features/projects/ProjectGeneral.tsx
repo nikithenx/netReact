@@ -39,7 +39,7 @@ const ProjectGeneral: React.FC<PropsInterface> = (props: PropsInterface) => {
                 </Grid>
                 <Grid item xs={6} sm={6} md={6}>
                     <AutocompleteSponsors
-                        label={"Sponsors"}
+                        label={"Sponsor"}
                         value={props.sponsor}
                         isRequired={true}
                         onValueChanged={props.sponsorChanged} />
