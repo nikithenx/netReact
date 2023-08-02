@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Application.Contracts;
 using Domain.Projects;
 using Application.DTOs.Projects;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -20,9 +21,8 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetReadOnyList()
         {
@@ -87,7 +87,7 @@ namespace API.Controllers
                 var isSuccess = await _unitOfWork.ProjectRepository.Delete(isExists);
                 if (isSuccess)
                 {
-                    return new ObjectResult(true) { Value = true, StatusCode = StatusCodes.Status204NoContent };
+                    return NoContent();
                 }
 
                 return new ObjectResult(false) { StatusCode = StatusCodes.Status500InternalServerError };

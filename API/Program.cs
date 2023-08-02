@@ -1,5 +1,4 @@
 using Application;
-using Microsoft.OpenApi.Models;
 using Persistence;
 using Identity;
 
@@ -11,17 +10,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.ConfigureIdentityServices(builder.Configuration);
 builder.Services.ConfigurePersistenceServices(builder.Configuration);
 builder.Services.ConfigureApplicationServices();
-
-
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "netReact API",
-        Version = "v1",
-        Description = "This is the API for the netReact project"
-    });
-});
 
 builder.Services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
 {

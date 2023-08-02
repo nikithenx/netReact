@@ -50,7 +50,8 @@ namespace Identity.Services
 
             var token = new JwtSecurityToken(
                 issuer: _configuration["Jwt:Issuer"],
-                claims: claims,
+                audience: _configuration["Jwt:Issuer"],
+                claims: claims,                
                 expires: DateTime.UtcNow.AddMinutes(Convert.ToInt32(_configuration["Jwt:Duration"])),
                 signingCredentials: credentials
             );
