@@ -1,6 +1,8 @@
 
 export class NavigationPoints {
 
+    static readonly LandingPage: string = '/';
+
     static readonly ProjectList: string = '/projects';
     static readonly ProjectCreation: string = '/creation-project';
 

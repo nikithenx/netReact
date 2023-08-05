@@ -34,7 +34,7 @@ export default function NavMenuItems() {
 
     return (
         <React.Fragment>
-            <ListItemButton onClick={() => onNavigateTo('/')}>
+            <ListItemButton onClick={() => onNavigateTo(NavigationPoints.LandingPage)}>
                 <ListItemIcon>
                     <Home color="primary"/>
                 </ListItemIcon>

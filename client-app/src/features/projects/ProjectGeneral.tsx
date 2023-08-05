@@ -4,9 +4,9 @@ import {
     Grid
 } from "@mui/material";
 import { Sponsor } from "../../app/models/sponsors/Sponsor";
-import AutocompleteSponsors from "../templates/AutocompleteSponsors";
-import DatePickerGeneric from "../templates/DatePickerGeneric";
-import TextFieldGeneric from "../templates/TextFieldGeneric";
+import AutocompleteSponsors from "../components/AutocompleteSponsors";
+import DatePickerGeneric from "../components/DatePickerGeneric";
+import TextFieldGeneric from "../components/TextFieldGeneric";
 
 
 interface PropsInterface {

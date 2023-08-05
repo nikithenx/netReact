@@ -7,7 +7,7 @@ import { NavigationPoints } from "./NavigationPoints";
 
 const Routes = () => {
     const routes = useRoutes([
-        { path: '/', element: <LandingPage /> },
+        { path: NavigationPoints.LandingPage, element: <LandingPage /> },
         { path: NavigationPoints.ProjectList, element: <ProjectList /> },
         { path: NavigationPoints.ProjectCreation, element: <CreateProject />}
     ]);

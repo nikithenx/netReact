@@ -1,4 +1,4 @@
-using Domain.Login;
+using Application.DTOs.Login;
 using Identity.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,9 +42,9 @@ namespace API.Controllers
             }
         }
 
-        [Route("login")]  
-        [HttpPost]  
-        public async Task<IActionResult> LoginAsync([FromBody] LoginUserDto userDto)  
+        [HttpPost] 
+        [Route("login")]   
+        public async Task<IActionResult> LoginAsync(LoginUserDto userDto)  
         {  
             try 
             {
@@ -52,9 +52,8 @@ namespace API.Controllers
                 if (user is null)                
                     return Unauthorized(userDto);
 
-                var token = await _identityService.GenerateToken(user);
-
-                return new ObjectResult(true) { StatusCode = StatusCodes.Status202Accepted, Value = token };
+                var token = await _identityService.GenerateToken(user);         
+                return Ok(token);       
             }
             catch(Exception ex) 
             {

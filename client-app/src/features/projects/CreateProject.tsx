@@ -24,9 +24,9 @@ import { Sponsor } from "../../app/models/sponsors/Sponsor";
 import { TagBase } from "../../app/models/tags/TagBase";
 import { Endpoints } from "../../constants/Endpoints";
 import { mapper } from "../../mappings/mapper";
-import AppUserCard from "../templates/AppUserCard";
-import AutocompleteTags from "../templates/AutocompleteTags";
-import AutocompleteUsers from "../templates/AutocompleteUsers";
+import AppUserCard from "../components/AppUserCard";
+import AutocompleteTags from "../components/AutocompleteTags";
+import AutocompleteUsers from "../components/AutocompleteUsers";
 import ProjectGeneral from "./ProjectGeneral";
 
 

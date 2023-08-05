@@ -1,11 +1,11 @@
 using System.Text;
-using Domain.Login;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using Identity.Models;
+using Application.DTOs.Login;
 
 namespace Identity.Services
 {

@@ -1,11 +1,11 @@
-import { Button, Container, Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import InfoCard from "./InfoCard";
 import { CardModel } from "./CardModel";
 
 
 const cards: CardModel[] = [
     { 
-        image: "/images/project_management.jpg", 
+        image: "/images/project_management.jpeg", 
         header: "Project Management", 
         description: "Manage your projects by maintaining data such as timeline or budget" 
     },
