@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Application.Contracts;
 using Domain.Projects;
 using Application.DTOs.Projects;
-using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -30,6 +29,28 @@ namespace API.Controllers
             {
                 var response = await _unitOfWork.ProjectRepository.GetReadOnlyList();
                 return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return new ObjectResult(ex.Message) { StatusCode = StatusCodes.Status500InternalServerError };
+            }
+        }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetById(int id)
+        {
+            try
+            {
+                var response = await _unitOfWork.ProjectRepository.GetAsync<ProjectFullDto>(x => x.Id == id);
+
+                if (response is not null)
+                {
+                    return Ok(response);
+                }
+                
+                return BadRequest();
             }
             catch (Exception ex)
             {
@@ -77,7 +98,7 @@ namespace API.Controllers
             {
                 var isExists = await _unitOfWork.ProjectRepository.GetAsync(
                     filter: x => x.Id == id, 
-                    includeProperties: $"{nameof(Project.AppUsers)},{nameof(Project.Tags)}");
+                    includeProperties: "AppUsers,Tags");
 
                 if (isExists == null)
                 {

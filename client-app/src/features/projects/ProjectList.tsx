@@ -28,6 +28,8 @@ import React, { useEffect, useState } from 'react'
 import { ProjectReadOnly } from '../../app/models/projects/ProjectReadOnly';
 import { Endpoints } from '../../constants/Endpoints';
 import { ProjectDialog } from '../dialogs/ProjectDialog';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { NavigationPoints } from '../../constants/NavigationPoints';
 
 function CustomToolbar() {
     return (
@@ -48,6 +50,8 @@ const ProjectList = () => {
     const [open, setOpen] = useState(false);
     const [dialogProps, setDialogProps] = useState<null | ProjectReadOnly>(null);
 
+    let navigate: NavigateFunction = useNavigate();
+
     useEffect(() => {
         async function loadProjects() {
             await axios.get(Endpoints.Projects)
@@ -58,6 +62,13 @@ const ProjectList = () => {
         }
         loadProjects();
     }, [])
+
+    const onEditProject = React.useCallback(
+        (id: number) => () => {
+            navigate(`${NavigationPoints.ProjectUpdate}/${id}`)
+        },
+        [],
+    );
 
     const onClickDelete = React.useCallback(
         (params: ProjectReadOnly) => () => {
@@ -154,7 +165,7 @@ const ProjectList = () => {
                     <Tooltip title={"Edit " + params.row.name}>
                         <GridActionsCellItem
                             icon={<Edit />}
-                            onClick={onClickDelete(params.row)}
+                            onClick={onEditProject(params.row.id)}
                             label="Edit"
                             sx={{ color: orange[700] }}
                         />

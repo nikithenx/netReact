@@ -5,6 +5,6 @@ namespace Application.Contracts
 {
     public interface ITagRepository : IGenericRepository<Tag>
     {
-        Task<IEnumerable<TagBaseDto>> GetForAutocomplete();
+        Task<IEnumerable<TagDto>> GetForAutocomplete();
     }
 }

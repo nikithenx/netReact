@@ -10,18 +10,18 @@ import {
     useEffect,
     useState
 } from "react";
-import { TagBase } from "../../app/models/tags/TagBase";
+import { ProjectTag } from "../../app/models/tags/ProjectTag";
 import { Endpoints } from "../../constants/Endpoints";
 
 interface PropsInterface {
     tagIds: number[];
-    onValueChanged: (value: TagBase) => void;
+    onValueChanged: (value: ProjectTag) => void;
 }
 
 const AutocompleteSponsor: React.FC<PropsInterface> = (props: PropsInterface) => {
 
     const [open, setOpen] = useState(false);
-    const [options, setOptions] = useState<readonly TagBase[]>([]);
+    const [options, setOptions] = useState<readonly ProjectTag[]>([]);
     const loading = open && options.length === 0;
 
     useEffect(() => {

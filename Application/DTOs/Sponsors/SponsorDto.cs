@@ -1,4 +1,6 @@
 ﻿
+using Application.DTOs.Projects;
+
 namespace Application.DTOs.Sponsors
 {
     public partial class SponsorDto
@@ -8,6 +10,8 @@ namespace Application.DTOs.Sponsors
         public string Surname { get; set; }
         public string Email { get; set; }
         public string Region { get; set; }
+
+        public virtual ProjectDto Project { get; set; }
     }
 
     public class SponsorCreateDto

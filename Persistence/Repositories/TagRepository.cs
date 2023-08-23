@@ -18,7 +18,7 @@ namespace Persistence.Repositories
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<TagBaseDto>> GetForAutocomplete()
-            => await _db.Tags.ProjectTo<TagBaseDto>(_mapper.ConfigurationProvider).ToListAsync();
+        public async Task<IEnumerable<TagDto>> GetForAutocomplete()
+            => await _db.Tags.ProjectTo<TagDto>(_mapper.ConfigurationProvider).ToListAsync();
     }
 }

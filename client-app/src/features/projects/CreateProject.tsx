@@ -21,13 +21,13 @@ import { AppUser } from "../../app/models/appUsers/AppUser";
 import { AppUserForSearch } from "../../app/models/appUsers/AppUserForSearch";
 import { ProjectCreation } from "../../app/models/projects/ProjectCreation";
 import { Sponsor } from "../../app/models/sponsors/Sponsor";
-import { TagBase } from "../../app/models/tags/TagBase";
 import { Endpoints } from "../../constants/Endpoints";
 import { mapper } from "../../mappings/mapper";
 import AppUserCard from "../components/AppUserCard";
 import AutocompleteTags from "../components/AutocompleteTags";
 import AutocompleteUsers from "../components/AutocompleteUsers";
 import ProjectGeneral from "./ProjectGeneral";
+import { ProjectTag } from "../../app/models/tags/ProjectTag";
 
 
 const CreateProject = () => {
@@ -42,13 +42,13 @@ const CreateProject = () => {
     const [description, setDescription] = useState('');
 
     // Tags assigned to the project
-    const [tags, setTags] = useState<TagBase[]>([]);
+    const [tags, setTags] = useState<ProjectTag[]>([]);
     const tagIds = tags.map(({ id }) => id);
 
-    const addTag = (tag: TagBase) => {
+    const addTag = (tag: ProjectTag) => {
         setTags(tags => [...tags, { ...tag }]);
     };
-    const removeTag = (toDelete: TagBase) => () => {
+    const removeTag = (toDelete: ProjectTag) => () => {
         setTags((tags) => tags.filter((tag) => tag.id !== toDelete.id));
     };
 
