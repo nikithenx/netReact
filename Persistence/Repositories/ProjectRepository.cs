@@ -24,7 +24,7 @@ namespace Persistence.Repositories
             if (!string.IsNullOrEmpty(latest))
             {
                 _ = int.TryParse(latest[..4], out var year);
-                _ = int.TryParse(latest[4..], out var index);
+                _ = int.TryParse(latest[5..], out var index);
                 
 
                 if (year != DateTime.Now.Year)
@@ -34,15 +34,18 @@ namespace Persistence.Repositories
 
                 index++;
 
-                return $"{year}{index:0000}";
+                return $"{year}-{index:0000}";
             }
 
-            return $"{DateTime.Now.Year}{1:0000}";
+            return $"{DateTime.Now.Year}-{1:0000}";
         }
 
         public async Task<IReadOnlyList<ProjectDto>> GetReadOnlyList()
         {
-            return await _db.Projects.ProjectTo<ProjectDto>(_mapper.ConfigurationProvider).ToListAsync();
+            return await _db.Projects
+                .ProjectTo<ProjectDto>(_mapper.ConfigurationProvider)
+                .OrderByDescending(x => x.Nr)
+                .ToListAsync();
         }
     }
 }

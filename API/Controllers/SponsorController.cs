@@ -22,7 +22,6 @@ namespace API.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAll()
         {
@@ -34,7 +33,7 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                return new ObjectResult(ex.Message) { StatusCode = StatusCodes.Status500InternalServerError };
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
@@ -54,16 +53,13 @@ namespace API.Controllers
                 var sponsor = _mapper.Map<Sponsor>(dto);
                 var response = await _unitOfWork.SponsorRepository.AddAsync(sponsor);
 
-                if (response.Id != 0)
-                {
-                    return new ObjectResult(true) { Value = response, StatusCode = StatusCodes.Status201Created };
-                }
-
-                return Created($"{ControllerContext.ActionDescriptor.ControllerName}", response.Id);
+                return response.Id > 0
+                    ? Created("", response.Id)
+                    : StatusCode(StatusCodes.Status500InternalServerError, "Id not incremented");
             }
             catch (Exception ex)
             {
-                return new ObjectResult(ex.Message) { StatusCode = StatusCodes.Status500InternalServerError };
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
     }

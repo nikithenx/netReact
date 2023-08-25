@@ -32,12 +32,13 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                return new ObjectResult(ex.Message) { StatusCode = StatusCodes.Status500InternalServerError };
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetById(int id)
         {
@@ -45,16 +46,13 @@ namespace API.Controllers
             {
                 var response = await _unitOfWork.ProjectRepository.GetAsync<ProjectFullDto>(x => x.Id == id);
 
-                if (response is not null)
-                {
-                    return Ok(response);
-                }
-                
-                return BadRequest();
+                return response is not null 
+                    ? Ok(response)
+                    : NotFound();
             }
             catch (Exception ex)
             {
-                return new ObjectResult(ex.Message) { StatusCode = StatusCodes.Status500InternalServerError };
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
@@ -75,16 +73,13 @@ namespace API.Controllers
                 project.Nr = await _unitOfWork.ProjectRepository.ComputeNr();
                 var response = await _unitOfWork.ProjectRepository.AddAsync(project);
 
-                if (response.Id != 0)
-                {
-                    return new ObjectResult(true) { Value = response, StatusCode = StatusCodes.Status201Created };
-                }
-
-                return Created($"{ControllerContext.ActionDescriptor.ControllerName}", response.Id);
+                return response.Id > 0
+                    ? Created("", response.Id)
+                    : StatusCode(StatusCodes.Status500InternalServerError, "Id not incremented");
             }
             catch (Exception ex)
             {
-                return new ObjectResult(ex.Message) { StatusCode = StatusCodes.Status500InternalServerError };
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
 
@@ -105,17 +100,15 @@ namespace API.Controllers
                     return NotFound();
                 }
 
-                var isSuccess = await _unitOfWork.ProjectRepository.Delete(isExists);
-                if (isSuccess)
-                {
-                    return NoContent();
-                }
+                var isDeleted = await _unitOfWork.ProjectRepository.Delete(isExists);
 
-                return new ObjectResult(false) { StatusCode = StatusCodes.Status500InternalServerError };
+                return isDeleted
+                    ? NoContent()
+                    : StatusCode(StatusCodes.Status500InternalServerError, "Deletion not successful"); 
             }
             catch (Exception ex)
             {
-                return new ObjectResult(ex.Message) { StatusCode = StatusCodes.Status500InternalServerError };
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
     }

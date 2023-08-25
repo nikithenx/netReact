@@ -28,6 +28,8 @@ import AutocompleteTags from "../components/AutocompleteTags";
 import AutocompleteUsers from "../components/AutocompleteUsers";
 import ProjectGeneral from "./ProjectGeneral";
 import { ProjectTag } from "../../app/models/tags/ProjectTag";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+import { NavigationPoints } from "../../constants/NavigationPoints";
 
 
 const CreateProject = () => {
@@ -76,9 +78,12 @@ const CreateProject = () => {
         })
     };
 
+    let navigate: NavigateFunction = useNavigate();
+
     async function createProject() {
         await axios.post(Endpoints.Projects, project)
             .then(function (response) {
+                navigate(`${NavigationPoints.ProjectUpdate}/${response.data}`)
                 console.log(response);
             })
             .catch(function (error) {
