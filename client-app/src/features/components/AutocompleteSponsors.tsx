@@ -15,7 +15,7 @@ import { Endpoints } from "../../constants/Endpoints";
 interface PropsInterface {
     isRequired: boolean;
     label: string;
-    value?: Sponsor | null;
+    value: Sponsor;
     onValueChanged: (value: Sponsor) => void;
 }
 
@@ -67,7 +67,9 @@ const AutocompleteSponsors: React.FC<PropsInterface> = (props: PropsInterface) =
                 setOpen(false);
             }}
             isOptionEqualToValue={(option, value) => option.forename === value.forename || option.surname === value.surname}
-            getOptionLabel={(option) => option.forename + ' ' + option.surname}
+            getOptionLabel={(option) => option.forename != null && option.surname != null ? 
+                                        option.forename + ' ' + option.surname 
+                                        : ''}
             options={options}
             loading={loading}
             renderInput={(params) => (

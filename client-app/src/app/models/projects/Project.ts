@@ -1,4 +1,5 @@
 import { AppUser } from "../appUsers/AppUser";
+import { Sponsor } from "../sponsors/Sponsor";
 import { ProjectTag } from "../tags/ProjectTag";
 
 export interface Project {
@@ -10,6 +11,7 @@ export interface Project {
     endDate: Date;
     description: string;
 
-    tags: ProjectTag[]
+    sponsor: Sponsor;
+    tags: ProjectTag[];
     appUsers: AppUser[];
 }

@@ -10,7 +10,7 @@ import TextFieldGeneric from "../components/TextFieldGeneric";
 
 
 interface PropsInterface {
-    sponsor?: Sponsor | null;
+    sponsor: Sponsor;
     name: string;
     startDate: Date;
     endDate: Date;

@@ -35,7 +35,7 @@ const CreateProject = () => {
     const steps = ['General', 'Add Tags', 'Add Users'];
     const [activeStep, setActiveStep] = useState(0);
 
-    const [sponsor, setSponsor] = useState<Sponsor | null>(null);
+    const [sponsor, setSponsor] = useState<Sponsor>({} as Sponsor);
     const [name, setName] = useState('');
     const [startDate, setStartDate] = useState(new Date);
     const [endDate, setEndDate] = useState(new Date);
@@ -63,7 +63,7 @@ const CreateProject = () => {
 
     const project: ProjectCreation =
     {
-        sponsorId: sponsor?.id ?? 0,
+        sponsorId: sponsor.id,
         name: name,
         startDate: startDate,
         endDate: endDate,
