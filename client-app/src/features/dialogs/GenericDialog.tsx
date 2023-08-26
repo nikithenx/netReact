@@ -16,7 +16,7 @@ interface PropsInterface {
     onClose: (value: boolean) => any;
 }
 
-export const ProjectDialog: React.FC<PropsInterface> = (props: PropsInterface) => {
+export const GenericDialog: React.FC<PropsInterface> = (props: PropsInterface) => {
 
     return (
         <Dialog

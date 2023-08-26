@@ -10,6 +10,7 @@ import { Sponsor } from "../../../app/models/sponsors/Sponsor";
 import LoadingDialog from "../../dialogs/LoadingDialog";
 import TextFieldGeneric from "../../components/TextFieldGeneric";
 import DatePickerGeneric from "../../components/DatePickerGeneric";
+import ErrorDialog from "../../dialogs/ErrorDialog";
 
 const UpdateProject = () => {
 
@@ -48,6 +49,9 @@ const UpdateProject = () => {
         <div>
             <LoadingDialog
                 open={loading}
+            />
+            <ErrorDialog 
+                open={!loading && project.id === 0}
             />
             {!loading && project.id !== 0 && 
                 <Grid container spacing={3}>

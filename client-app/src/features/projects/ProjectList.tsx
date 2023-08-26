@@ -27,7 +27,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { ProjectReadOnly } from '../../app/models/projects/ProjectReadOnly';
 import { Endpoints } from '../../constants/Endpoints';
-import { ProjectDialog } from '../dialogs/ProjectDialog';
+import { GenericDialog } from '../dialogs/GenericDialog';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { NavigationPoints } from '../../constants/NavigationPoints';
 
@@ -186,7 +186,7 @@ const ProjectList = () => {
 
     return (
         <div className="d-flex flex-column page-main-margin">
-            <ProjectDialog
+            <GenericDialog
                 title={`Delete ${dialogProps?.nr} ${dialogProps?.name}`}
                 content={"Do you really want to delete this project? This action cannot be undone."}
                 open={open}
