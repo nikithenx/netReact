@@ -37,50 +37,48 @@ const CreateProject = () => {
     const steps = ['General', 'Add Tags', 'Add Users'];
     const [activeStep, setActiveStep] = useState(0);
 
+    const [project, setProject] = useState<ProjectCreation>(new ProjectCreation());
     const [sponsor, setSponsor] = useState<Sponsor>({} as Sponsor);
-    const [name, setName] = useState('');
-    const [startDate, setStartDate] = useState(new Date);
-    const [endDate, setEndDate] = useState(new Date);
-    const [description, setDescription] = useState('');
+
+    const setName = (name : string) => { project.name = name };
+    const setStartDate = (startDate : Date) => { project.startDate = startDate };
+    const setEndDate = (endDate : Date) => { project.endDate = endDate };
+    const setDescription = (desc: string) => { project.description = desc };
+    const setSponsorId = (sponsor: Sponsor) => {
+        setProject({ ...project, sponsorId: sponsor.id})  
+        setSponsor(sponsor);
+    };
 
     // Tags assigned to the project
     const [tags, setTags] = useState<ProjectTag[]>([]);
-    const tagIds = tags.map(({ id }) => id);
-
-    const addTag = (tag: ProjectTag) => {
-        setTags(tags => [...tags, { ...tag }]);
+    const addTag = (tag: ProjectTag) => { 
+        setTags(tags => [ ...tags, tag ]);
     };
     const removeTag = (toDelete: ProjectTag) => () => {
         setTags((tags) => tags.filter((tag) => tag.id !== toDelete.id));
     };
 
     const [users, setUsers] = useState<AppUser[]>([]);
-
     const addUser = (user: AppUserForSearch) => {
         const appUser = mapper.map<AppUserForSearch, AppUser>(
             user, 'AppUserSearch', 'AppUser' 
         ); 
-        setUsers(users => [...users, { ...appUser }])
-    }
-
-    const project: ProjectCreation =
-    {
-        sponsorId: sponsor.id,
-        name: name,
-        startDate: startDate,
-        endDate: endDate,
-        description: description,
-        tags: tags.map(({ id }) => {
-            return { tagId: id };
-        }),
-        appUsers: users.map((user) => {
-            return { appUserId: user.id, startDate: startDate, endDate: endDate };
-        })
+        setUsers(users => [...users, { ...appUser }]);
+    };
+    const removeUser = (identifier: number) => {
+        setUsers((users) => users.filter((user) => user.id !== identifier));
     };
 
     let navigate: NavigateFunction = useNavigate();
 
     async function createProject() {
+        project.tags = tags.map(({ id }) => { 
+            return { tagId: id }; 
+        })
+        project.appUsers = users.map((user) => {
+            return { appUserId: user.id, startDate: project.startDate, endDate: project.endDate };
+        })
+
         await axios.post(Endpoints.Projects, project)
             .then(function (response) {
                 navigate(`${NavigationPoints.ProjectUpdate}/${response.data}`)
@@ -182,14 +180,14 @@ const CreateProject = () => {
                 <form onSubmit={handleNext}>
                     <CreateProjectData
                         sponsor={sponsor}
-                        sponsorChanged={setSponsor}
-                        name={name}
+                        sponsorChanged={setSponsorId}
+                        name={project.name}
                         nameChanged={setName}
-                        startDate={startDate}
+                        startDate={project.startDate}
                         startDateChanged={setStartDate}
-                        endDate={endDate}
+                        endDate={project.endDate}
                         endDateChanged={setEndDate}
-                        description={description}
+                        description={project.description}
                         descriptionChanged={setDescription}
                     />
                     <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
@@ -214,7 +212,8 @@ const CreateProject = () => {
                     <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
                         <AutocompleteTags
                             onValueChanged={addTag}
-                            tagIds={tagIds} />
+                            tagIds={tags.map(({ id }) => id)} 
+                        />
                         <Stack sx={{ my: 4 }} direction="row" spacing={1}>
                             {tags?.length > 0 && tags.map((tag) => (
                                 <Chip
@@ -250,12 +249,15 @@ const CreateProject = () => {
                     <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
                         <AutocompleteUsers
                             onValueChanged={addUser}
-                            />
+                            userIds={users.map(({ id }) => id)}
+                        />
                         <Stack sx={{ my: 2 }} direction="row" spacing={1}>
                             {users?.length > 0 && users.map((user) => (
                                 <AppUserCard
                                     key={user.id}
-                                    user={user} />
+                                    identifier={user.id}
+                                    user={user}
+                                    onRemoveUser={removeUser} />
                             ))}
                         </Stack>
                     </Container>

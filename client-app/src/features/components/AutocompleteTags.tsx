@@ -62,7 +62,7 @@ const AutocompleteSponsor: React.FC<PropsInterface> = (props: PropsInterface) =>
             onClose={() => {
                 setOpen(false);
             }}
-            isOptionEqualToValue={(option, value) => option.name === value.name}
+            isOptionEqualToValue={(option, value) => option.id === value.id}
             getOptionLabel={(option) => option.name}
             options={options.filter((tag) => !props.tagIds.includes(tag.id))}
             loading={loading}

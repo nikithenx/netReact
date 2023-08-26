@@ -49,7 +49,7 @@ export default function NavMenuItems() {
             </ListItemButton>
             {openSublistProject &&
                 sublistProjects.map((item) => (
-                    <ListItemButton sx={{ pl: 4 }} onClick={() => onNavigateTo(item.href)}>
+                    <ListItemButton key={item.label} sx={{ pl: 4 }} onClick={() => onNavigateTo(item.href)}>
                         <ListItemIcon>
                             {item.icon}
                         </ListItemIcon>

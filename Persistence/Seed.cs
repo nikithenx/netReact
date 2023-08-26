@@ -18,11 +18,14 @@ namespace Persistence
             await SeedUsers(serviceProvider);
 
             var dbContext = serviceProvider.GetService<ApplicationDbContext>();
+
             await SeedSponsors(dbContext);
             await SeedUsers(dbContext);
             await SeedTags(dbContext);
             await dbContext.SaveChangesAsync();
+
             await SeedProjects(dbContext);
+            await SeedProjectsAppUsers(dbContext);
         }
 
         private static async Task SeedRoles(IServiceProvider serviceProvider)
@@ -250,6 +253,40 @@ namespace Persistence
                 }
 
                 await db.Projects.AddRangeAsync(projects);
+                await db.SaveChangesAsync();
+            }
+        }
+
+        private static async Task SeedProjectsAppUsers(ApplicationDbContext db)
+        {
+            if (!await db.ProjectsAppUsers.AnyAsync())
+            {
+                var projectIds = await db.Projects.Select(x => x.Id).ToArrayAsync();
+                var appUserIds = await db.AppUsers.Select(x => x.Id).ToArrayAsync();
+
+                var projectsAppUsers = new List<ProjectAppUser>(projectIds.Length * appUserIds.Length);
+
+                for (int i = 0; i < 5; i++)
+                {
+                    Random r = new();
+                    int projectIndex = r.Next(0, projectIds.Length);
+
+                    for (int j = 0; j < 5 ; j++)
+                    {
+                        int appUserIndex = r.Next(0, appUserIds.Length);
+                        projectsAppUsers.Add(new()
+                        {
+                            ProjectId = projectIds[projectIndex],
+                            AppUserId = appUserIds[appUserIndex],
+                            StartDate = DateTime.Now.AddDays(projectIndex * 3),
+                            EndDate = DateTime.Now.AddMonths(appUserIndex * 2)
+                        });
+                    }
+                }
+
+                var toSave = projectsAppUsers.DistinctBy(x => new { x.ProjectId, x.AppUserId });
+
+                await db.ProjectsAppUsers.AddRangeAsync(toSave);
                 await db.SaveChangesAsync();
             }
         }

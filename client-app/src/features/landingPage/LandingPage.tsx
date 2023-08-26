@@ -37,7 +37,7 @@ const LandingPage = () => {
         <Container maxWidth="xl">
             <Grid container spacing={3}>
                 {cards?.length > 0 && cards.map((data) => (
-                    <Grid item xs={6} md={4}>
+                    <Grid item xs={6} md={4} key={data.image}>
                         <InfoCard card={data} />
                     </Grid>
                 ))}

@@ -13,6 +13,7 @@ import { AppUserForSearch } from "../../app/models/appUsers/AppUserForSearch";
 import { Endpoints } from "../../constants/Endpoints";
 
 interface PropsInterface {
+    userIds: number[];
     onValueChanged: (value: AppUserForSearch) => void;
 }
 
@@ -60,10 +61,9 @@ const AutocompleteUsers: React.FC<PropsInterface> = (props: PropsInterface) => {
             onClose={() => {
                 setOpen(false);
             }}
-            isOptionEqualToValue={(option, value) => option.forename === value.forename &&
-                                                     option.surname === value.surname}
+            isOptionEqualToValue={(option, value) => option.id === value.id}
             getOptionLabel={(option) => option.forename + ' ' + option.surname}
-            options={options}
+            options={options.filter((user) => !props.userIds.includes(user.id))}
             loading={loading}
             renderInput={(params) => (
                 <TextField

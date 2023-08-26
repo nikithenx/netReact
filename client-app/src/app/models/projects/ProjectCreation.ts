@@ -2,7 +2,20 @@ import { AppUserForProjectCreation } from "../appUsers/AppUserForProjectCreation
 import { TagForProjectCreation } from "../tags/TagForProjectCreation";
 
 
-export interface ProjectCreation {
+export class ProjectCreation {
+
+    constructor()
+    {
+        this.sponsorId = 0;
+        this.name = "";
+        this.startDate = new Date;
+        this.endDate = new Date;
+        this.description = "";
+
+        this.tags = [];
+        this.appUsers = []
+    }
+
     sponsorId: number;
     name: string;
     startDate: Date;

@@ -1,4 +1,4 @@
-import { Edit, LocationOn } from "@mui/icons-material";
+import { LocationOn, PersonRemove } from "@mui/icons-material";
 import {
     Avatar,
     Box,
@@ -6,18 +6,20 @@ import {
     Divider,
     IconButton,
     Stack,
+    Tooltip,
     Typography
 } from "@mui/material";
 import { AppUser } from "../../app/models/appUsers/AppUser";
 
 interface PropsInterface {
     user: AppUser
+    identifier: number
+    onRemoveUser: (identifier : number) => void
 }
 
 const AppUserCard: React.FC<PropsInterface> = (props: PropsInterface) => {
 
     const fullname = props.user.forename + ' ' + props.user.surname;
-    const location = props.user.country;
 
     return (
         <Card>
@@ -28,13 +30,19 @@ const AppUserCard: React.FC<PropsInterface> = (props: PropsInterface) => {
                     <Stack direction='row'>
                         <LocationOn color="primary" />
                         <Typography variant="body2" color="text.secondary">
-                            {location}
+                            {props.user.country}
                         </Typography>
                     </Stack>
                 </Stack>
-                <IconButton>
-                    <Edit sx={{ fontSize: 14, m: 1 }} />
-                </IconButton>
+                <Tooltip title="Remove user">
+                    <IconButton
+                        onClick={() => props.onRemoveUser(props.identifier)}>
+                        <PersonRemove 
+                            color="error"
+                            sx={{ fontSize: 14, m: 1 }} 
+                        />
+                    </IconButton>
+                </Tooltip>                
             </Box>
             <Divider />
         </Card>
