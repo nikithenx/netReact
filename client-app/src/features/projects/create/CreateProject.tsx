@@ -17,19 +17,19 @@ import {
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
-import { AppUser } from "../../app/models/appUsers/AppUser";
-import { AppUserForSearch } from "../../app/models/appUsers/AppUserForSearch";
-import { ProjectCreation } from "../../app/models/projects/ProjectCreation";
-import { Sponsor } from "../../app/models/sponsors/Sponsor";
-import { Endpoints } from "../../constants/Endpoints";
-import { mapper } from "../../mappings/mapper";
-import AppUserCard from "../components/AppUserCard";
-import AutocompleteTags from "../components/AutocompleteTags";
-import AutocompleteUsers from "../components/AutocompleteUsers";
-import ProjectGeneral from "./ProjectGeneral";
-import { ProjectTag } from "../../app/models/tags/ProjectTag";
+import { AppUser } from "../../../app/models/appUsers/AppUser";
+import { AppUserForSearch } from "../../../app/models/appUsers/AppUserForSearch";
+import { ProjectCreation } from "../../../app/models/projects/ProjectCreation";
+import { Sponsor } from "../../../app/models/sponsors/Sponsor";
+import { Endpoints } from "../../../constants/Endpoints";
+import { mapper } from "../../../mappings/mapper";
+import AppUserCard from "../../components/AppUserCard";
+import AutocompleteTags from "../../components/AutocompleteTags";
+import AutocompleteUsers from "../../components/AutocompleteUsers";
+import CreateProjectData from "./CreateProjectData";
+import { ProjectTag } from "../../../app/models/tags/ProjectTag";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { NavigationPoints } from "../../constants/NavigationPoints";
+import { NavigationPoints } from "../../../constants/NavigationPoints";
 
 
 const CreateProject = () => {
@@ -180,7 +180,7 @@ const CreateProject = () => {
             </Stepper>
             {activeStep === 0 && 
                 <form onSubmit={handleNext}>
-                    <ProjectGeneral
+                    <CreateProjectData
                         sponsor={sponsor}
                         sponsorChanged={setSponsor}
                         name={name}
@@ -188,7 +188,7 @@ const CreateProject = () => {
                         startDate={startDate}
                         startDateChanged={setStartDate}
                         endDate={endDate}
-                        endChanged={setEndDate}
+                        endDateChanged={setEndDate}
                         description={description}
                         descriptionChanged={setDescription}
                     />

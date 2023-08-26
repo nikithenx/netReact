@@ -3,10 +3,10 @@ import {
     Container,
     Grid
 } from "@mui/material";
-import { Sponsor } from "../../app/models/sponsors/Sponsor";
-import AutocompleteSponsors from "../components/AutocompleteSponsors";
-import DatePickerGeneric from "../components/DatePickerGeneric";
-import TextFieldGeneric from "../components/TextFieldGeneric";
+import { Sponsor } from "../../../app/models/sponsors/Sponsor";
+import AutocompleteSponsors from "../../components/AutocompleteSponsors";
+import DatePickerGeneric from "../../components/DatePickerGeneric";
+import TextFieldGeneric from "../../components/TextFieldGeneric";
 
 
 interface PropsInterface {
@@ -19,12 +19,12 @@ interface PropsInterface {
     sponsorChanged: (value: Sponsor) => void;
     nameChanged: (value: string) => void;
     startDateChanged: (value: Date) => void;
-    endChanged: (value: Date) => void;
+    endDateChanged: (value: Date) => void;
     descriptionChanged: (value: string) => void;
 }
 
 
-const ProjectGeneral: React.FC<PropsInterface> = (props: PropsInterface) => {
+const CreateProjectData: React.FC<PropsInterface> = (props: PropsInterface) => {
 
     return (
         <Container maxWidth="md" sx={{ mt: 4, mb: 4 }}>
@@ -33,7 +33,7 @@ const ProjectGeneral: React.FC<PropsInterface> = (props: PropsInterface) => {
                     <TextFieldGeneric
                         value={props.name}
                         label={"Project Name"}
-                        isRequired={true}
+                        isRequired
                         isDisabled={false}
                         onValueChanged={props.nameChanged} />
                 </Grid>
@@ -41,7 +41,7 @@ const ProjectGeneral: React.FC<PropsInterface> = (props: PropsInterface) => {
                     <AutocompleteSponsors
                         label={"Sponsor"}
                         value={props.sponsor}
-                        isRequired={true}
+                        isRequired
                         onValueChanged={props.sponsorChanged} />
                 </Grid>
                 <Grid item xs={12} sm={6} md={6}>
@@ -56,13 +56,13 @@ const ProjectGeneral: React.FC<PropsInterface> = (props: PropsInterface) => {
                         value={props.endDate}
                         label={"End Date"}
                         isDisabled={false}
-                        onValueChanged={props.endChanged} />
+                        onValueChanged={props.endDateChanged} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={12}>
                     <TextFieldGeneric
                         value={props.description}
                         label={"Project Description"}
-                        isRequired={true}
+                        isRequired
                         isDisabled={false}
                         onValueChanged={props.descriptionChanged} />
                 </Grid>
@@ -71,4 +71,4 @@ const ProjectGeneral: React.FC<PropsInterface> = (props: PropsInterface) => {
     );
 }
 
-export default ProjectGeneral;
+export default CreateProjectData;
