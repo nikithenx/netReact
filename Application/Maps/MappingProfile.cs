@@ -17,6 +17,7 @@ namespace Application.Maps
             CreateMap<AppUser, AppUserForSearchDto>().MaxDepth(1);
             CreateMap<AppUserForProjectCreationDto, ProjectAppUser>().MaxDepth(1);
             CreateMap<ProjectAppUser, ProjectAppUserDto>().MaxDepth(2);
+            CreateMap<ProjectAppUser, ProjectAppUserBaseDto>().MaxDepth(1);
 
             CreateMap<Project, ProjectCreateDto>().MaxDepth(1).ReverseMap();
             CreateMap<Project, ProjectUpdateDto>().MaxDepth(1).ReverseMap();
@@ -32,6 +33,7 @@ namespace Application.Maps
 
             CreateMap<Tag, TagDto>().MaxDepth(1);
             CreateMap<TagForProjectCreationDto, ProjectTag>().MaxDepth(1);
+            CreateMap<ProjectTag, ProjectTagDto>().MaxDepth(1);
             CreateMap<ProjectTag, ProjectTagBaseDto>().MaxDepth(1);
         }
     }
