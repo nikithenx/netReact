@@ -1,13 +1,16 @@
 import { Stack, Typography } from "@mui/material";
-import { ProjectAppUser } from "../../../app/models/projectsAppUsers/ProjectAppUser";
 import AppUserCard from "../../components/AppUserCard";
+import { ProjectAppUserBase } from "../../../app/models/projectsAppUsers/ProjectAppUserBase";
+import { Constants } from "../../../constants/Constants";
 
 interface PropsInterface {
-    users: ProjectAppUser[]
+    users: ProjectAppUserBase[]
     onRemoveUser: (identifier: number) => void
 }
 
 const AreaAppUsers = (props: PropsInterface) => {
+
+    const dateFormat = Constants.DateFormat;
 
     return (
 
@@ -25,8 +28,8 @@ const AreaAppUsers = (props: PropsInterface) => {
                                 />                                
                                 <Typography fontWeight={300}>
                                     {`
-                                        ${new Date(user.startDate).toLocaleDateString()} - 
-                                        ${new Date(user.endDate).toLocaleDateString()}
+                                        ${dateFormat.format(new Date(user.startDate))} - 
+                                        ${dateFormat.format(new Date(user.endDate))}
                                     `}
                                 </Typography>
                             </Stack>                            

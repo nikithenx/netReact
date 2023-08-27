@@ -1,4 +1,4 @@
-import { ProjectAppUser } from "../projectsAppUsers/ProjectAppUser";
+import { ProjectAppUserBase } from "../projectsAppUsers/ProjectAppUserBase";
 import { ProjectTagBase } from "../projectsTags/ProjectTagBase";
 import { Sponsor } from "../sponsors/Sponsor";
 
@@ -13,5 +13,5 @@ export interface Project {
 
     sponsor: Sponsor;
     tags: ProjectTagBase[];
-    appUsers: ProjectAppUser[];
+    appUsers: ProjectAppUserBase[];
 }
