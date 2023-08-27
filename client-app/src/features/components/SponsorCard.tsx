@@ -18,13 +18,13 @@ const SponsorCard: React.FC<PropsInterface> = (props: PropsInterface) => {
                 <Stack spacing={0.5} sx={{ ml: 1 }}>
                     <Typography fontWeight={600}>{fullname}</Typography>
                     <Stack direction='row'>
-                        <Mail color="primary" sx={{ mr: 1 }} />
+                        <Mail color="secondary" sx={{ mr: 1 }} />
                         <Typography variant="body2" color="text.secondary">
                             {props.sponsor.email}
                         </Typography>
                     </Stack>
                     <Stack direction='row'>
-                        <LocationOn color="primary" sx={{ mr: 1 }} />
+                        <LocationOn color="secondary" sx={{ mr: 1 }} />
                         <Typography variant="body2" color="text.secondary">
                             {props.sponsor.region}
                         </Typography>

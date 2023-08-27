@@ -1,4 +1,4 @@
-import { Edit, GroupAdd, Settings, Tag } from "@mui/icons-material";
+import { Edit, GroupAdd, Settings, Tag as TagIcon } from "@mui/icons-material";
 import {
     Box,
     Button,
@@ -27,7 +27,7 @@ import AppUserCard from "../../components/AppUserCard";
 import AutocompleteTags from "../../components/AutocompleteTags";
 import AutocompleteUsers from "../../components/AutocompleteUsers";
 import CreateProjectData from "./CreateProjectData";
-import { ProjectTag } from "../../../app/models/tags/ProjectTag";
+import { Tag } from "../../../app/models/tags/Tag";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { NavigationPoints } from "../../../constants/NavigationPoints";
 
@@ -50,11 +50,11 @@ const CreateProject = () => {
     };
 
     // Tags assigned to the project
-    const [tags, setTags] = useState<ProjectTag[]>([]);
-    const addTag = (tag: ProjectTag) => { 
+    const [tags, setTags] = useState<Tag[]>([]);
+    const addTag = (tag: Tag) => { 
         setTags(tags => [ ...tags, tag ]);
     };
-    const removeTag = (toDelete: ProjectTag) => () => {
+    const removeTag = (toDelete: Tag) => () => {
         setTags((tags) => tags.filter((tag) => tag.id !== toDelete.id));
     };
 
@@ -150,7 +150,7 @@ const CreateProject = () => {
 
         const icons: { [index: string]: React.ReactElement } = {
             1: <Settings />,
-            2: <Tag />,
+            2: <TagIcon />,
             3: <GroupAdd />,
         };
 

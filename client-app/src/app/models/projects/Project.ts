@@ -1,6 +1,6 @@
 import { ProjectAppUser } from "../projectsAppUsers/ProjectAppUser";
+import { ProjectTagBase } from "../projectsTags/ProjectTagBase";
 import { Sponsor } from "../sponsors/Sponsor";
-import { ProjectTag } from "../tags/ProjectTag";
 
 export interface Project {
     id: number;
@@ -12,6 +12,6 @@ export interface Project {
     description: string;
 
     sponsor: Sponsor;
-    tags: ProjectTag[];
+    tags: ProjectTagBase[];
     appUsers: ProjectAppUser[];
 }

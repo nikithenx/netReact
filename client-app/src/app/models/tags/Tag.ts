@@ -1,5 +1,5 @@
 
-export interface ProjectTag {
+export interface Tag {
     id: number;
     name: string;
 }

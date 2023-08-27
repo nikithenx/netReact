@@ -32,7 +32,7 @@ namespace Application.Maps
 
             CreateMap<Tag, TagDto>().MaxDepth(1);
             CreateMap<TagForProjectCreationDto, ProjectTag>().MaxDepth(1);
-            CreateMap<ProjectTag, ProjectTagDto>().MaxDepth(1);
+            CreateMap<ProjectTag, ProjectTagBaseDto>().MaxDepth(1);
         }
     }
 }

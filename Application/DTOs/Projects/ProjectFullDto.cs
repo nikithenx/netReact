@@ -12,6 +12,6 @@ namespace Application.DTOs.Projects
         public string Description { get; set; }
         public virtual SponsorForProjectDto Sponsor { get; set; }
         public virtual ICollection<ProjectAppUserDto> AppUsers { get; set; }
-        public virtual ICollection<ProjectTagDto> Tags { get; set; }
+        public virtual ICollection<ProjectTagBaseDto> Tags { get; set; }
     }
 }

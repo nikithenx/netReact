@@ -28,7 +28,7 @@ const AppUserCard: React.FC<PropsInterface> = (props: PropsInterface) => {
                 <Stack spacing={0.5} sx={{ ml: 1 }}>
                     <Typography fontWeight={600}>{fullname}</Typography>
                     <Stack direction='row'>
-                        <LocationOn color="primary" />
+                        <LocationOn color="secondary" sx={{ mr: 1 }} />
                         <Typography variant="body2" color="text.secondary">
                             {props.user.country}
                         </Typography>
@@ -38,7 +38,7 @@ const AppUserCard: React.FC<PropsInterface> = (props: PropsInterface) => {
                     <IconButton
                         onClick={() => props.onRemoveUser(props.identifier)}>
                         <PersonRemove 
-                            color="error"
+                            color="inherit"
                             sx={{ fontSize: 14, m: 1 }} 
                         />
                     </IconButton>

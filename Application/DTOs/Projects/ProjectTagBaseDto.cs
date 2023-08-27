@@ -1,7 +1,7 @@
 ﻿
 namespace Application.DTOs.Projects
 {
-    public class ProjectTagDto
+    public class ProjectTagBaseDto
     {
         public int Id { get; set; }
         public int TagId { get; set; }

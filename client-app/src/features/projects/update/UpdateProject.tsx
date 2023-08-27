@@ -1,4 +1,4 @@
-import { Divider, Grid, Paper, Stack, Typography } from "@mui/material";
+import { Breadcrumbs, Divider, Grid, Link, Paper, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Project } from "../../../app/models/projects/Project";
@@ -12,6 +12,10 @@ import TextFieldGeneric from "../../components/TextFieldGeneric";
 import DatePickerGeneric from "../../components/DatePickerGeneric";
 import ErrorDialog from "../../dialogs/ErrorDialog";
 import AreaAppUsers from "./AreaAppUsers";
+import AreaTags from "./AreaTags";
+import { NavigationPoints } from "../../../constants/NavigationPoints";
+import { Home, Segment } from "@mui/icons-material";
+import { SectionHeader } from "./SectionHeader";
 
 const UpdateProject = () => {
 
@@ -37,6 +41,9 @@ const UpdateProject = () => {
     };
     const removeUser = (identifier: number) => {
         setProject({ ...project, appUsers: project.appUsers.filter((user) => user.id !== identifier)})
+    };
+    const removeTag = (id: number) => {
+        setProject({ ...project, tags: project.tags.filter((tag) => tag.id !== id)})
     };
 
     useEffect(() => {
@@ -65,9 +72,26 @@ const UpdateProject = () => {
             />
             {!loading && project.id !== 0 && 
                 <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                        <Breadcrumbs separator=">" aria-label="breadcrumb">
+                            <Link underline="hover" 
+                                    color="inherit" 
+                                    href={NavigationPoints.LandingPage}>
+                                <Home sx={{ mr: 0.5 }} fontSize="inherit" />
+                                Home
+                            </Link>
+                            <Link underline="hover" 
+                                    color="inherit" 
+                                    href={NavigationPoints.ProjectList}>
+                                <Segment sx={{ mr: 0.5 }} fontSize="inherit" />
+                                Project List
+                            </Link>
+                            <Typography fontWeight={600}>{project.nr}</Typography>
+                        </Breadcrumbs>
+                    </Grid>
                     <Grid item xs={12} sm={8} md={8}>
                         <Stack spacing={4}>
-                            <Typography variant="h6" fontWeight={800}>General Data</Typography>
+                            <SectionHeader title="General Data" />                         
                             <Stack spacing={4} direction='row'>
                                 <TextFieldGeneric
                                     value={project.nr}
@@ -103,7 +127,7 @@ const UpdateProject = () => {
                     </Grid>
                     <Grid item xs={12} sm={4} md={4}>
                         <Stack spacing={4}>
-                            <Typography variant="h6" fontWeight={800}>Sponsor Data</Typography>
+                            <SectionHeader title="Sponsor Data" /> 
                             <Paper elevation={3} sx={{ p: 2 }}>
                                 <Stack spacing={4} direction='column'>
                                     <SponsorCard sponsor={project.sponsor} />
@@ -117,12 +141,20 @@ const UpdateProject = () => {
                         </Stack>                                        
                     </Grid>
                     <Grid item xs={12}>
-                        <Divider sx={{ mb: 2 }} />
-                        <Stack spacing={4}>
-                            <Typography variant="h6" fontWeight={800}>Project Team</Typography>
+                        <Stack spacing={4} sx={{ mb: 2 }}>
+                            <SectionHeader title="Project Team" /> 
                             <AreaAppUsers 
                                 users={project.appUsers}
                                 onRemoveUser={removeUser}
+                            />
+                        </Stack>                     
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Stack spacing={4} sx={{ mb: 2 }}>
+                            <SectionHeader title="Tags" /> 
+                            <AreaTags
+                                tags={project.tags}
+                                onRemoveTag={removeTag}
                             />
                         </Stack>                     
                     </Grid>
