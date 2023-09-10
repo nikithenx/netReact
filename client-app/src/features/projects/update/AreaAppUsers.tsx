@@ -2,6 +2,9 @@ import { Stack, Typography } from "@mui/material";
 import AppUserCard from "../../components/AppUserCard";
 import { ProjectAppUserBase } from "../../../app/models/projectsAppUsers/ProjectAppUserBase";
 import { Constants } from "../../../constants/Constants";
+import axios from "axios";
+import { Endpoints } from "../../../constants/Endpoints";
+import { Mappings } from "../../../mappings/Mappings";
 
 interface PropsInterface {
     users: ProjectAppUserBase[]
@@ -11,6 +14,19 @@ interface PropsInterface {
 const AreaAppUsers = (props: PropsInterface) => {
 
     const dateFormat = Constants.DateFormat;
+
+    async function update(projectUser: ProjectAppUserBase)
+    {
+        var appUser = Mappings.toProjectAppUserUpdate(projectUser, 1);
+
+        await axios.post(Endpoints.ProjectAppUsers, appUser)
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
 
     return (
 

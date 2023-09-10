@@ -30,6 +30,7 @@ import CreateProjectData from "./CreateProjectData";
 import { Tag } from "../../../app/models/tags/Tag";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { NavigationPoints } from "../../../constants/NavigationPoints";
+import { Mappings } from "../../../mappings/Mappings";
 
 
 const CreateProject = () => {
@@ -60,9 +61,7 @@ const CreateProject = () => {
 
     const [users, setUsers] = useState<AppUser[]>([]);
     const addUser = (user: AppUserForSearch) => {
-        const appUser = mapper.map<AppUserForSearch, AppUser>(
-            user, 'AppUserSearch', 'AppUser' 
-        ); 
+        const appUser = Mappings.toAppUser(user);
         setUsers(users => [...users, { ...appUser }]);
     };
     const removeUser = (identifier: number) => {
